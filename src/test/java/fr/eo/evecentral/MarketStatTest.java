@@ -18,6 +18,7 @@
 
 package fr.eo.evecentral;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -57,6 +58,7 @@ public class MarketStatTest extends AbstractTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public void live() throws IOException {
 		long time = System.currentTimeMillis();

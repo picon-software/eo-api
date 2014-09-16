@@ -18,6 +18,7 @@
 
 package fr.eo.api;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -63,6 +64,7 @@ public class CharacterSheetTest extends AbstractTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public void live() throws FileNotFoundException {
 

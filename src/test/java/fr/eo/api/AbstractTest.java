@@ -31,7 +31,7 @@ import java.io.InputStreamReader;
 
 public abstract class AbstractTest {
 
-	private static final String RESOURCES_RELATIVE_FOLDER = "eo-api/src/test/resources/";
+	private static final String RESOURCES_RELATIVE_FOLDER = "src/test/resources/";
 
 	protected static InputStream getResource(String fileName) throws FileNotFoundException {
 		File resource = new File(RESOURCES_RELATIVE_FOLDER + fileName);

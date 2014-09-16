@@ -20,20 +20,24 @@ package fr.eo.api;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.simpleframework.xml.transform.RegistryMatcher;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import fr.eo.api.error.NetworkErrorHandler;
 import fr.eo.api.manager.Manager;
 import fr.eo.api.model.ApiKeyInfo;
 import fr.eo.api.services.AccountService;
+import fr.eo.api.util.DateFormatTransformer;
 import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 
@@ -49,7 +53,10 @@ public class ApiErrorTest extends AbstractTest {
 
 	@Test
 	public void serializer() {
-		Serializer serializer = new Persister();
+		RegistryMatcher m = new RegistryMatcher();
+		m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
+
+		Serializer serializer = new Persister(m);
 
 		try {
 			InputStream inputStream =
@@ -69,6 +76,7 @@ public class ApiErrorTest extends AbstractTest {
 		}
 	}
 
+	@Ignore
 	@Test(expected = RetrofitError.class)
 	public void testTimeout() throws FileNotFoundException {
 
@@ -97,6 +105,7 @@ public class ApiErrorTest extends AbstractTest {
 		fail("No error occured !");
 	}
 
+	@Ignore
 	@Test(expected = RetrofitError.class)
 	public void testNoInternet() throws FileNotFoundException {
 
