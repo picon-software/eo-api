@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+  ~ Copyright (C) 2014 Picon software
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along
+  ~ with this program; if not, write to the Free Software Foundation, Inc.,
+  ~ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  -->
+
+<eveapi version="2">
+	<currentTime>2010-10-28 19:16:23</currentTime>
+	<result>
+		<characterNPCStandings>
+			<rowset name="agents" key="fromID" columns="fromID,fromName,standing">
+				<row fromID="3009841" fromName="Pausent Ansin" standing="0.1" />
+				<row fromID="3009846" fromName="Charie Octienne" standing="0.19" />
+			</rowset>
+			<rowset name="NPCCorporations" key="fromID" columns="fromID,fromName,standing">
+				<row fromID="1000061" fromName="Freedom Extension" standing="0" />
+				<row fromID="1000064" fromName="Carthum Conglomerate" standing="0.34" />
+				<row fromID="1000094" fromName="TransStellar Shipping" standing="0.02" />
+			</rowset>
+			<rowset name="factions" key="fromID" columns="fromID,fromName,standing">
+				<row fromID="500003" fromName="Amarr Empire" standing="-0.1" />
+				<row fromID="500020" fromName="Serpentis" standing="-1" />
+			</rowset>
+		</characterNPCStandings>
+	</result>
+	<cachedUntil>2008-09-03 15:20:19</cachedUntil>
+</eveapi>
