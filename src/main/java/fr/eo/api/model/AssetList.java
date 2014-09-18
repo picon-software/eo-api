@@ -24,7 +24,6 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.core.Commit;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,10 +73,10 @@ public class AssetList extends ApiResult {
 		if (result != null && result.rowset != null) {
 			for (Asset asset : result.rowset) {
 				if (asset.flag == ASSET_FLAG_HANGAR) {
-					if(!assets.containsKey(asset.locationID)) {
+					if (!assets.containsKey(asset.locationID)) {
 						assets.put(asset.locationID, new HashMap<Long, Long>());
 					}
-					if(assets.get(asset.locationID).containsKey(asset.typeID)) {
+					if (assets.get(asset.locationID).containsKey(asset.typeID)) {
 						long newQuantity = assets.get(asset.locationID).get(asset.typeID) + asset.quantity;
 						assets.get(asset.locationID).put(asset.typeID, newQuantity);
 					} else {
