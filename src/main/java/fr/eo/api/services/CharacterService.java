@@ -30,25 +30,25 @@ import retrofit.http.Query;
  */
 public interface CharacterService {
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/char/CharacterSheet.xml.aspx")
-	CharacterSheet characterSheet(
-			@Query("keyID") long keyID,
-			@Query("vCode") String vCode,
-			@Query("characterID") long characterID);
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/char/CharacterSheet.xml.aspx")
+    CharacterSheet characterSheet(
+            @Query("keyID") long keyID,
+            @Query("vCode") String vCode,
+            @Query("characterID") long characterID);
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/char/AssetList.xml.aspx")
-	AssetList assetList(
-			@Query("keyID") long keyID,
-			@Query("vCode") String vCode,
-			@Query("characterID") long characterID);
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/char/AssetList.xml.aspx")
+    AssetList assetList(
+            @Query("keyID") long keyID,
+            @Query("vCode") String vCode,
+            @Query("characterID") long characterID);
 
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/char/Standings.xml.aspx")
-	Standings standings(
-			@Query("keyID") long keyID,
-			@Query("vCode") String vCode,
-			@Query("characterID") long characterID);
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/char/Standings.xml.aspx")
+    Standings standings(
+            @Query("keyID") long keyID,
+            @Query("vCode") String vCode,
+            @Query("characterID") long characterID);
 }

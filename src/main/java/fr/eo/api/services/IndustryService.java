@@ -28,11 +28,11 @@ import retrofit.http.Headers;
  */
 public interface IndustryService {
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/industry/systems/")
-	System systems();
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/industry/systems/")
+    System systems();
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/industry/facilities/")
-	Facilities facilities();
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/industry/facilities/")
+    Facilities facilities();
 }

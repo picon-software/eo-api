@@ -18,6 +18,10 @@
 
 package fr.eo.api;
 
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.AssetList;
+import fr.eo.api.services.CharacterService;
+import fr.eo.api.util.DateFormatTransformer;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
@@ -27,11 +31,6 @@ import org.simpleframework.xml.transform.RegistryMatcher;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.AssetList;
-import fr.eo.api.services.CharacterService;
-import fr.eo.api.util.DateFormatTransformer;
-
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -40,43 +39,43 @@ import static org.junit.Assert.fail;
  */
 public class AssetListTest extends AbstractTest {
 
-	@Test
-	public void serializer() {
-		RegistryMatcher m = new RegistryMatcher();
-		m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
+    @Test
+    public void serializer() {
+        RegistryMatcher m = new RegistryMatcher();
+        m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
 
-		Serializer serializer = new Persister(m);
+        Serializer serializer = new Persister(m);
 
-		try {
-			AssetList eveApi = serializer.read(AssetList.class,
-					getResource("eveapi-char-asset-list-test.xml"));
+        try {
+            AssetList eveApi = serializer.read(AssetList.class,
+                    getResource("eveapi-char-asset-list-test.xml"));
 
-			assertThat(eveApi).isNotNull();
-			assertThat(eveApi.getAssets()).isNotNull().isNotEmpty().containsKey(60011314L);
+            assertThat(eveApi).isNotNull();
+            assertThat(eveApi.getAssets()).isNotNull().isNotEmpty().containsKey(60011314L);
 
-			assertThat(eveApi.getAssets().get(60011314L)).containsKey(12822L);
-			assertThat(eveApi.getAssets().get(60011314L).get(12822L)).isEqualTo(6L);
+            assertThat(eveApi.getAssets().get(60011314L)).containsKey(12822L);
+            assertThat(eveApi.getAssets().get(60011314L).get(12822L)).isEqualTo(6L);
 
-			assertThat(eveApi.getAssets().get(60011314L)).containsKey(3025L);
-			assertThat(eveApi.getAssets().get(60011314L).get(3025L)).isEqualTo(6L);
+            assertThat(eveApi.getAssets().get(60011314L)).containsKey(3025L);
+            assertThat(eveApi.getAssets().get(60011314L).get(3025L)).isEqualTo(6L);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
 
-	@Ignore
-	@Test
-	public void live() throws FileNotFoundException {
-		CharacterService characterService = new Manager().characterService();
+    @Ignore
+    @Test
+    public void live() throws FileNotFoundException {
+        CharacterService characterService = new Manager().characterService();
 
-		TestCredential testCredential = getCredential();
+        TestCredential testCredential = getCredential();
 
-		AssetList assetList = characterService.assetList(testCredential.keyID,
-				testCredential.vCode, testCredential.characterID);
+        AssetList assetList = characterService.assetList(testCredential.keyID,
+                testCredential.vCode, testCredential.characterID);
 
-		assertThat(assetList).isNotNull();
-		assertThat(assetList.getAssets()).isNotNull().isNotEmpty();
-	}
+        assertThat(assetList).isNotNull();
+        assertThat(assetList.getAssets()).isNotNull().isNotEmpty();
+    }
 }

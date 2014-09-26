@@ -18,6 +18,10 @@
 
 package fr.eo.api;
 
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.ApiKeyInfo;
+import fr.eo.api.services.AccountService;
+import fr.eo.api.util.DateFormatTransformer;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
@@ -27,11 +31,6 @@ import org.simpleframework.xml.transform.RegistryMatcher;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
-
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.ApiKeyInfo;
-import fr.eo.api.services.AccountService;
-import fr.eo.api.util.DateFormatTransformer;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -43,42 +42,42 @@ import static org.junit.Assert.fail;
  */
 public class ApiKeyInfoTest extends AbstractTest {
 
-	@Test
-	public void serializer() {
-		RegistryMatcher m = new RegistryMatcher();
-		m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
+    @Test
+    public void serializer() {
+        RegistryMatcher m = new RegistryMatcher();
+        m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
 
-		Serializer serializer = new Persister(m);
-		try {
-			InputStream inputStream =
-					getResource("eveapi-api-key-info-test.xml");
+        Serializer serializer = new Persister(m);
+        try {
+            InputStream inputStream =
+                    getResource("eveapi-api-key-info-test.xml");
 
-			assertNotNull("no input stream !", inputStream);
+            assertNotNull("no input stream !", inputStream);
 
-			ApiKeyInfo eveApi = serializer.read(ApiKeyInfo.class, inputStream);
+            ApiKeyInfo eveApi = serializer.read(ApiKeyInfo.class, inputStream);
 
-			assertEquals("Character", eveApi.result.key.type);
-			assertEquals(59760264, eveApi.result.key.accessMask);
+            assertEquals("Character", eveApi.result.key.type);
+            assertEquals(59760264, eveApi.result.key.accessMask);
 
-			assertThat(eveApi.result.key.rowset).isNotNull().isNotEmpty();
+            assertThat(eveApi.result.key.rowset).isNotNull().isNotEmpty();
 
-			assertEquals(898901870, eveApi.result.key.rowset.get(0).characterID);
-			assertEquals("Desmont McCallock", eveApi.result.key.rowset.get(0).characterName);
-			assertEquals(1000009, eveApi.result.key.rowset.get(0).corporationID);
-			assertEquals("Caldari Provisions", eveApi.result.key.rowset.get(0).corporationName);
+            assertEquals(898901870, eveApi.result.key.rowset.get(0).characterID);
+            assertEquals("Desmont McCallock", eveApi.result.key.rowset.get(0).characterName);
+            assertEquals(1000009, eveApi.result.key.rowset.get(0).corporationID);
+            assertEquals("Caldari Provisions", eveApi.result.key.rowset.get(0).corporationName);
 
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-	}
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
-	@Ignore
-	@Test
-	public void live() throws FileNotFoundException {
-		AccountService accountService = new Manager().accountService();
+    @Ignore
+    @Test
+    public void live() throws FileNotFoundException {
+        AccountService accountService = new Manager().accountService();
 
-		TestCredential testCredential = getCredential();
+        TestCredential testCredential = getCredential();
 
-		accountService.apiKeyInfo(testCredential.keyID, testCredential.vCode);
-	}
+        accountService.apiKeyInfo(testCredential.keyID, testCredential.vCode);
+    }
 }

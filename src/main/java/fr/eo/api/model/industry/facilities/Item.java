@@ -22,68 +22,68 @@ import fr.eo.api.model.industry.SolarSystem;
 
 public class Item {
 
-	private long facilityID;
-	private String name;
-	private Owner owner;
-	private Region region;
-	private SolarSystem solarSystem;
-	private float tax;
-	private Type type;
+    private long facilityID;
+    private String name;
+    private Owner owner;
+    private Region region;
+    private SolarSystem solarSystem;
+    private float tax;
+    private Type type;
 
-	public long getFacilityID() {
-		return facilityID;
-	}
+    public long getFacilityID() {
+        return facilityID;
+    }
 
-	public void setFacilityID(long facilityID) {
-		this.facilityID = facilityID;
-	}
+    public void setFacilityID(long facilityID) {
+        this.facilityID = facilityID;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Owner getOwner() {
-		return owner;
-	}
+    public Owner getOwner() {
+        return owner;
+    }
 
-	public void setOwner(Owner owner) {
-		this.owner = owner;
-	}
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 
-	public Region getRegion() {
-		return region;
-	}
+    public Region getRegion() {
+        return region;
+    }
 
-	public void setRegion(Region region) {
-		this.region = region;
-	}
+    public void setRegion(Region region) {
+        this.region = region;
+    }
 
-	public SolarSystem getSolarSystem() {
-		return solarSystem;
-	}
+    public SolarSystem getSolarSystem() {
+        return solarSystem;
+    }
 
-	public void setSolarSystem(SolarSystem solarSystem) {
-		this.solarSystem = solarSystem;
-	}
+    public void setSolarSystem(SolarSystem solarSystem) {
+        this.solarSystem = solarSystem;
+    }
 
-	public float getTax() {
-		return tax;
-	}
+    public float getTax() {
+        return tax;
+    }
 
-	public void setTax(float tax) {
-		this.tax = tax;
-	}
+    public void setTax(float tax) {
+        this.tax = tax;
+    }
 
-	public Type getType() {
-		return type;
-	}
+    public Type getType() {
+        return type;
+    }
 
-	public void setType(Type type) {
-		this.type = type;
-	}
+    public void setType(Type type) {
+        this.type = type;
+    }
 
 }

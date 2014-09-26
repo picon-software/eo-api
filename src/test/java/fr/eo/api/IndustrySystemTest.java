@@ -20,16 +20,14 @@ package fr.eo.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.industry.system.System;
+import fr.eo.api.services.IndustryService;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.industry.system.System;
-import fr.eo.api.services.IndustryService;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -38,24 +36,24 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class IndustrySystemTest extends AbstractTest {
 
-	@Test
-	public void fromJson() throws FileNotFoundException {
-		Gson gson = new GsonBuilder().create();
-		System system = gson.fromJson(new InputStreamReader(getResource("crest-industry-system.json")),
-				System.class);
+    @Test
+    public void fromJson() throws FileNotFoundException {
+        Gson gson = new GsonBuilder().create();
+        System system = gson.fromJson(new InputStreamReader(getResource("crest-industry-system.json")),
+                System.class);
 
-		assertThat(system).isNotNull();
-	}
+        assertThat(system).isNotNull();
+    }
 
-	@Ignore
-	@Test
-	public void live() {
-		IndustryService industryService = new Manager().industryService();
+    @Ignore
+    @Test
+    public void live() {
+        IndustryService industryService = new Manager().industryService();
 
-		System systems = industryService.systems();
+        System systems = industryService.systems();
 
-		assertThat(systems).isNotNull();
-		assertThat(systems.getItems()).isNotNull().isNotEmpty()
-				.hasSize(systems.getTotalCount());
-	}
+        assertThat(systems).isNotNull();
+        assertThat(systems.getItems()).isNotNull().isNotEmpty()
+                .hasSize(systems.getTotalCount());
+    }
 }

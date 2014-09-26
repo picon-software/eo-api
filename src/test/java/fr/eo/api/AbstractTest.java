@@ -20,7 +20,6 @@ package fr.eo.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import org.fest.assertions.api.Assertions;
 
 import java.io.File;
@@ -31,46 +30,46 @@ import java.io.InputStreamReader;
 
 public abstract class AbstractTest {
 
-	private static final String RESOURCES_RELATIVE_FOLDER = "src/test/resources/";
+    private static final String RESOURCES_RELATIVE_FOLDER = "src/test/resources/";
 
-	protected static InputStream getResource(String fileName) throws FileNotFoundException {
-		File resource = new File(RESOURCES_RELATIVE_FOLDER + fileName);
-		return new FileInputStream(resource);
-	}
+    protected static InputStream getResource(String fileName) throws FileNotFoundException {
+        File resource = new File(RESOURCES_RELATIVE_FOLDER + fileName);
+        return new FileInputStream(resource);
+    }
 
-	protected TestCredential getCredential() throws FileNotFoundException {
-		TestCredential testCredential;
-		try {
-			testCredential = TestCredential.load();
-		} catch (FileNotFoundException e) {
-			Assertions.fail("You need to create a credential.json file in the resources folder. Read the javadoc for more info.");
-			throw e;
-		}
+    protected TestCredential getCredential() throws FileNotFoundException {
+        TestCredential testCredential;
+        try {
+            testCredential = TestCredential.load();
+        } catch (FileNotFoundException e) {
+            Assertions.fail("You need to create a credential.json file in the resources folder. Read the javadoc for more info.");
+            throw e;
+        }
 
-		return testCredential;
-	}
+        return testCredential;
+    }
 
-	/**
-	 * The test credential representation
-	 *
-	 * <br /><pre>
-	 * {
-	 * "keyID": &lt;your api keyID&gt;,
-	 * "vCode": "&lt;your api vCode&gt;",
-	 * "characterID": &lt;a character id&gt;
-	 * }
-	 * </pre>
-	 */
-	public static class TestCredential {
-		public int keyID;
-		public String vCode;
-		public int characterID;
+    /**
+     * The test credential representation
+     * <p/>
+     * <br /><pre>
+     * {
+     * "keyID": &lt;your api keyID&gt;,
+     * "vCode": "&lt;your api vCode&gt;",
+     * "characterID": &lt;a character id&gt;
+     * }
+     * </pre>
+     */
+    public static class TestCredential {
+        public int keyID;
+        public String vCode;
+        public int characterID;
 
-		public static TestCredential load() throws FileNotFoundException {
-			Gson gson = new GsonBuilder().create();
+        public static TestCredential load() throws FileNotFoundException {
+            Gson gson = new GsonBuilder().create();
 
-			return gson.fromJson(new InputStreamReader(getResource("credential.json")),
-					TestCredential.class);
-		}
-	}
+            return gson.fromJson(new InputStreamReader(getResource("credential.json")),
+                    TestCredential.class);
+        }
+    }
 }

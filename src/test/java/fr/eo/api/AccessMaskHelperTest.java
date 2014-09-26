@@ -18,9 +18,8 @@
 
 package fr.eo.api;
 
-import org.junit.Test;
-
 import fr.eo.api.helper.AccessMaskHelper;
+import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -30,22 +29,22 @@ import static org.junit.Assert.assertTrue;
  */
 public class AccessMaskHelperTest {
 
-	@Test
-	public void test() {
-		long fullAccess = 268435455;
-		long specifiedAccess = 524298;
-		long invalidAccessMask = 10;
+    @Test
+    public void test() {
+        long fullAccess = 268435455;
+        long specifiedAccess = 524298;
+        long invalidAccessMask = 10;
 
-		assertTrue(AccessMaskHelper.isAccessible(fullAccess, AccessMaskHelper.CHARACTER_SHEET));
-		assertTrue(AccessMaskHelper.isAccessible(fullAccess, AccessMaskHelper.ASSET_LIST));
-		assertTrue(AccessMaskHelper.isAccessible(fullAccess, AccessMaskHelper.STANDINGS));
+        assertTrue(AccessMaskHelper.isAccessible(fullAccess, AccessMaskHelper.CHARACTER_SHEET));
+        assertTrue(AccessMaskHelper.isAccessible(fullAccess, AccessMaskHelper.ASSET_LIST));
+        assertTrue(AccessMaskHelper.isAccessible(fullAccess, AccessMaskHelper.STANDINGS));
 
-		assertTrue(AccessMaskHelper.isAccessible(specifiedAccess, AccessMaskHelper.CHARACTER_SHEET));
-		assertTrue(AccessMaskHelper.isAccessible(specifiedAccess, AccessMaskHelper.ASSET_LIST));
-		assertTrue(AccessMaskHelper.isAccessible(specifiedAccess, AccessMaskHelper.STANDINGS));
+        assertTrue(AccessMaskHelper.isAccessible(specifiedAccess, AccessMaskHelper.CHARACTER_SHEET));
+        assertTrue(AccessMaskHelper.isAccessible(specifiedAccess, AccessMaskHelper.ASSET_LIST));
+        assertTrue(AccessMaskHelper.isAccessible(specifiedAccess, AccessMaskHelper.STANDINGS));
 
-		assertTrue(AccessMaskHelper.isAccessible(invalidAccessMask, AccessMaskHelper.CHARACTER_SHEET));
-		assertTrue(AccessMaskHelper.isAccessible(invalidAccessMask, AccessMaskHelper.ASSET_LIST));
-		assertFalse(AccessMaskHelper.isAccessible(invalidAccessMask, AccessMaskHelper.STANDINGS));
-	}
+        assertTrue(AccessMaskHelper.isAccessible(invalidAccessMask, AccessMaskHelper.CHARACTER_SHEET));
+        assertTrue(AccessMaskHelper.isAccessible(invalidAccessMask, AccessMaskHelper.ASSET_LIST));
+        assertFalse(AccessMaskHelper.isAccessible(invalidAccessMask, AccessMaskHelper.STANDINGS));
+    }
 }

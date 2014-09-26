@@ -33,59 +33,59 @@ import java.util.List;
 @Root(strict = false)
 public class ApiKeyInfo extends ApiResult {
 
-	private static final long serialVersionUID = 7537262625587315747L;
+    private static final long serialVersionUID = 7537262625587315747L;
 
-	private List<CharacterInfo> characters;
+    private List<CharacterInfo> characters;
 
-	@Element(required = false)
-	public Result result;
+    @Element(required = false)
+    public Result result;
 
-	public ApiKeyInfo() {
-	}
+    public ApiKeyInfo() {
+    }
 
-	@Root(strict = false)
-	public static final class Result {
-		@Element
-		public Key key;
-	}
+    @Root(strict = false)
+    public static final class Result {
+        @Element
+        public Key key;
+    }
 
-	@Root(strict = false)
-	public static final class Key {
-		@Attribute
-		public long accessMask;
-		@Attribute
-		public String type;
-		@ElementList(entry = "row")
-		public List<CharacterInfo> rowset;
-	}
+    @Root(strict = false)
+    public static final class Key {
+        @Attribute
+        public long accessMask;
+        @Attribute
+        public String type;
+        @ElementList(entry = "row")
+        public List<CharacterInfo> rowset;
+    }
 
-	@Root(strict = false)
-	public static final class CharacterInfo {
-		public long accessMask;
-		@Attribute
-		public long characterID;
-		@Attribute
-		public String characterName;
-		@Attribute
-		public long corporationID;
-		@Attribute
-		public String corporationName;
-	}
+    @Root(strict = false)
+    public static final class CharacterInfo {
+        public long accessMask;
+        @Attribute
+        public long characterID;
+        @Attribute
+        public String characterName;
+        @Attribute
+        public long corporationID;
+        @Attribute
+        public String corporationName;
+    }
 
-	@Commit
-	public void commit() {
-		characters = new ArrayList<>();
-		if (result != null &&
-				result.key != null &&
-				result.key.rowset != null) {
-			for (CharacterInfo characterInfo : result.key.rowset) {
-				characterInfo.accessMask = result.key.accessMask;
-				characters.add(characterInfo);
-			}
-		}
-	}
+    @Commit
+    public void commit() {
+        characters = new ArrayList<>();
+        if (result != null &&
+                result.key != null &&
+                result.key.rowset != null) {
+            for (CharacterInfo characterInfo : result.key.rowset) {
+                characterInfo.accessMask = result.key.accessMask;
+                characters.add(characterInfo);
+            }
+        }
+    }
 
-	public List<CharacterInfo> getCharacters() {
-		return characters;
-	}
+    public List<CharacterInfo> getCharacters() {
+        return characters;
+    }
 }

@@ -23,13 +23,13 @@ package fr.eo.api.credential;
  */
 public class ApiCredential implements ApiParam {
 
-	public long keyId;
-	public String vCode;
+    public long keyId;
+    public String vCode;
 
-	public ApiCredential(long keyId, String vCode) {
-		this.keyId = keyId;
-		this.vCode = vCode;
-	}
+    public ApiCredential(long keyId, String vCode) {
+        this.keyId = keyId;
+        this.vCode = vCode;
+    }
 
     @Override
     public String getKey() {

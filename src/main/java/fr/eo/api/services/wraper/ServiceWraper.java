@@ -20,6 +20,7 @@ package fr.eo.api.services.wraper;
 
 import com.squareup.okhttp.internal.DiskLruCache;
 import com.squareup.okhttp.internal.Util;
+import fr.eo.api.model.ApiResult;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -30,135 +31,133 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
-import fr.eo.api.model.ApiResult;
-
 /**
  * @author picon.software
  */
 public class ServiceWraper {
 
-	private DiskLruCache cache;
+    private DiskLruCache cache;
 
-	public ServiceWraper(File cacheDir) {
-		try {
-			cache = DiskLruCache.open(cacheDir, 1, 1, 5 * 1024 * 1024);
-		} catch (IOException e) {
-			// can't initialize cache -> fallback to cacheless mode
-			cache = null;
-		}
-	}
+    public ServiceWraper(File cacheDir) {
+        try {
+            cache = DiskLruCache.open(cacheDir, 1, 1, 5 * 1024 * 1024);
+        } catch (IOException e) {
+            // can't initialize cache -> fallback to cacheless mode
+            cache = null;
+        }
+    }
 
-	protected boolean cacheContains(String key) {
-		if (cache == null) {
-			return false;
-		}
+    protected boolean cacheContains(String key) {
+        if (cache == null) {
+            return false;
+        }
 
-		try {
-			return cache.get(key) != null;
-		} catch (IOException e) {
-			return false;
-		}
-	}
+        try {
+            return cache.get(key) != null;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 
-	public <R extends ApiResult> R invoke(Callable<R> callable) {
-		String key = Util.hash(callable.cacheKey());
-		R result;
-		if (cacheContains(key)) {
-			//noinspection unchecked
-			result = (R) getFromCache(key);
-			if (new Date().before(result.localCachedUntil())) {
-				return result;
-			} else {
-				removeFromCache(key);
-			}
-		}
+    public <R extends ApiResult> R invoke(Callable<R> callable) {
+        String key = Util.hash(callable.cacheKey());
+        R result;
+        if (cacheContains(key)) {
+            //noinspection unchecked
+            result = (R) getFromCache(key);
+            if (new Date().before(result.localCachedUntil())) {
+                return result;
+            } else {
+                removeFromCache(key);
+            }
+        }
 
-		result = callable.call();
-		putIntoCache(key, result);
+        result = callable.call();
+        putIntoCache(key, result);
 
-		return result;
-	}
+        return result;
+    }
 
-	private boolean removeFromCache(String key) {
-		try {
-			return cache.remove(key);
-		} catch (IOException e) {
-			return false;
-		}
-	}
+    private boolean removeFromCache(String key) {
+        try {
+            return cache.remove(key);
+        } catch (IOException e) {
+            return false;
+        }
+    }
 
-	private ApiResult getFromCache(String key) {
-		if (cache == null) {
-			return null;
-		}
+    private ApiResult getFromCache(String key) {
+        if (cache == null) {
+            return null;
+        }
 
-		DiskLruCache.Snapshot snapshot;
-		ApiResult result = null;
-		try {
-			snapshot = cache.get(key);
-		} catch (IOException e) {
-			return null;
-		}
+        DiskLruCache.Snapshot snapshot;
+        ApiResult result = null;
+        try {
+            snapshot = cache.get(key);
+        } catch (IOException e) {
+            return null;
+        }
 
-		if (snapshot == null) {
-			return null;
-		}
+        if (snapshot == null) {
+            return null;
+        }
 
-		try {
-			result = readResult(snapshot.getInputStream(0));
-		} catch (IOException | ClassNotFoundException e) {
-			Util.closeQuietly(snapshot);
-		}
+        try {
+            result = readResult(snapshot.getInputStream(0));
+        } catch (IOException | ClassNotFoundException e) {
+            Util.closeQuietly(snapshot);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	private ApiResult readResult(InputStream is) throws IOException, ClassNotFoundException {
-		if (is == null) {
-			return null;
-		}
+    private ApiResult readResult(InputStream is) throws IOException, ClassNotFoundException {
+        if (is == null) {
+            return null;
+        }
 
-		ObjectInputStream ois = new ObjectInputStream(is);
-		return (ApiResult) ois.readObject();
-	}
+        ObjectInputStream ois = new ObjectInputStream(is);
+        return (ApiResult) ois.readObject();
+    }
 
-	private void putIntoCache(String key, ApiResult result) {
-		if (cache == null) {
-			return;
-		}
+    private void putIntoCache(String key, ApiResult result) {
+        if (cache == null) {
+            return;
+        }
 
-		DiskLruCache.Editor editor = null;
-		try {
-			editor = cache.edit(key);
-			writeResult(result, editor.newOutputStream(0));
-			editor.commit();
-		} catch (IOException e) {
-			abortQuietly(editor);
-		}
-	}
+        DiskLruCache.Editor editor = null;
+        try {
+            editor = cache.edit(key);
+            writeResult(result, editor.newOutputStream(0));
+            editor.commit();
+        } catch (IOException e) {
+            abortQuietly(editor);
+        }
+    }
 
-	private void writeResult(ApiResult result, OutputStream os) throws IOException {
-		if (os != null) {
-			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(os));
-			oos.writeObject(result);
-			oos.flush();
-			oos.close();
-		}
-	}
+    private void writeResult(ApiResult result, OutputStream os) throws IOException {
+        if (os != null) {
+            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(os));
+            oos.writeObject(result);
+            oos.flush();
+            oos.close();
+        }
+    }
 
-	private void abortQuietly(DiskLruCache.Editor editor) {
-		// Give up because the cache cannot be written.
-		try {
-			if (editor != null) {
-				editor.abort();
-			}
-		} catch (IOException ignored) {
-		}
-	}
+    private void abortQuietly(DiskLruCache.Editor editor) {
+        // Give up because the cache cannot be written.
+        try {
+            if (editor != null) {
+                editor.abort();
+            }
+        } catch (IOException ignored) {
+        }
+    }
 
-	public interface Callable<R extends ApiResult> {
-		String cacheKey();
+    public interface Callable<R extends ApiResult> {
+        String cacheKey();
 
-		R call();
-	}
+        R call();
+    }
 }

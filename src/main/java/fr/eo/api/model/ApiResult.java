@@ -32,25 +32,25 @@ import java.util.Date;
 @Root(strict = false)
 public abstract class ApiResult implements Serializable {
 
-	@Element
-	public Date currentTime;
-	@Element
-	public Date cachedUntil;
-	@Element(required = false)
-	public Error error;
+    @Element
+    public Date currentTime;
+    @Element
+    public Date cachedUntil;
+    @Element(required = false)
+    public Error error;
 
-	public Date responseTime = new Date();
+    public Date responseTime = new Date();
 
-	@Root(strict = false)
-	public static final class Error {
-		@Attribute
-		public int code;
-		@Text
-		public String label;
-	}
+    @Root(strict = false)
+    public static final class Error {
+        @Attribute
+        public int code;
+        @Text
+        public String label;
+    }
 
-	public Date localCachedUntil() {
-		long maxAge = cachedUntil.getTime() - currentTime.getTime();
-		return new Date(responseTime.getTime() + maxAge);
-	}
+    public Date localCachedUntil() {
+        long maxAge = cachedUntil.getTime() - currentTime.getTime();
+        return new Date(responseTime.getTime() + maxAge);
+    }
 }

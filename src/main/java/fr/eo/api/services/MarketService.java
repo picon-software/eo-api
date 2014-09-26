@@ -27,7 +27,7 @@ import retrofit.http.Headers;
  */
 public interface MarketService {
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/market/prices/")
-	Prices prices();
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/market/prices/")
+    Prices prices();
 }

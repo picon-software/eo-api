@@ -18,14 +18,13 @@
 
 package fr.eo.api.service.wraper;
 
+import fr.eo.api.model.ApiResult;
+import fr.eo.api.services.wraper.ServiceWraper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.Date;
-
-import fr.eo.api.model.ApiResult;
-import fr.eo.api.services.wraper.ServiceWraper;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -34,93 +33,93 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class ServiceWraperTest {
 
-	private static File cacheDir;
+    private static File cacheDir;
 
-	@BeforeClass
-	public static void beforeTest() {
-		cacheDir = org.fest.util.Files.newTemporaryFolder();
-	}
+    @BeforeClass
+    public static void beforeTest() {
+        cacheDir = org.fest.util.Files.newTemporaryFolder();
+    }
 
-	@Test
-	public void test() {
-		ServiceWraper serviceWraper = new ServiceWraper(cacheDir);
+    @Test
+    public void test() {
+        ServiceWraper serviceWraper = new ServiceWraper(cacheDir);
 
-		TestResult result = serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
-			@Override
-			public String cacheKey() {
-				return "givenResult1";
-			}
+        TestResult result = serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
+            @Override
+            public String cacheKey() {
+                return "givenResult1";
+            }
 
-			@Override
-			public TestResult call() {
-				return givenResult(1, 10000);
-			}
-		});
+            @Override
+            public TestResult call() {
+                return givenResult(1, 10000);
+            }
+        });
 
-		assertThat(result).isNotNull();
-		assertThat(result.getValue()).isEqualTo(1);
+        assertThat(result).isNotNull();
+        assertThat(result.getValue()).isEqualTo(1);
 
-		result = serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
-			@Override
-			public String cacheKey() {
-				return "givenResult1";
-			}
+        result = serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
+            @Override
+            public String cacheKey() {
+                return "givenResult1";
+            }
 
-			@Override
-			public TestResult call() {
-				return givenResult(2, 10000);
-			}
-		});
+            @Override
+            public TestResult call() {
+                return givenResult(2, 10000);
+            }
+        });
 
-		assertThat(result).isNotNull();
-		assertThat(result.getValue()).isEqualTo(1);
+        assertThat(result).isNotNull();
+        assertThat(result.getValue()).isEqualTo(1);
 
-		serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
-			@Override
-			public String cacheKey() {
-				return "givenResult2";
-			}
+        serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
+            @Override
+            public String cacheKey() {
+                return "givenResult2";
+            }
 
-			@Override
-			public TestResult call() {
-				return givenResult(2, -1);
-			}
-		});
+            @Override
+            public TestResult call() {
+                return givenResult(2, -1);
+            }
+        });
 
-		result = serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
-			@Override
-			public String cacheKey() {
-				return "givenResult2";
-			}
+        result = serviceWraper.invoke(new ServiceWraper.Callable<TestResult>() {
+            @Override
+            public String cacheKey() {
+                return "givenResult2";
+            }
 
-			@Override
-			public TestResult call() {
-				return givenResult(2, 1);
-			}
-		});
+            @Override
+            public TestResult call() {
+                return givenResult(2, 1);
+            }
+        });
 
-		assertThat(result).isNotNull();
-		assertThat(result.getValue()).isEqualTo(2);
-	}
+        assertThat(result).isNotNull();
+        assertThat(result.getValue()).isEqualTo(2);
+    }
 
-	private TestResult givenResult(int value, int validity) {
-		return new TestResult(value, validity);
-	}
+    private TestResult givenResult(int value, int validity) {
+        return new TestResult(value, validity);
+    }
 
-	private static class TestResult extends ApiResult {
+    private static class TestResult extends ApiResult {
 
-		private static final long serialVersionUID = -3989337475354971166L;
+        private static final long serialVersionUID = -3989337475354971166L;
 
-		private int value;
+        private int value;
 
-		private TestResult(int value, int validity) {
-			this.value = value;
-			this.currentTime = new Date();
-			this.cachedUntil = new Date(currentTime.getTime() + validity);
-		}
+        private TestResult(int value, int validity) {
+            this.value = value;
+            this.currentTime = new Date();
+            this.cachedUntil = new Date(currentTime.getTime() + validity);
+        }
 
-		public int getValue() {
-			return value;
-		}
-	}
+        public int getValue() {
+            return value;
+        }
+    }
 }

@@ -19,31 +19,31 @@
 package fr.eo.api.model.industry.system;
 
 public class SystemCostIndices {
-	private int activityID;
-	private String activityName;
-	private float costIndex;
+    private int activityID;
+    private String activityName;
+    private float costIndex;
 
-	public String getActivityName() {
-		return this.activityName;
-	}
+    public String getActivityName() {
+        return this.activityName;
+    }
 
-	public void setActivityName(String activityName) {
-		this.activityName = activityName;
-	}
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
 
-	public int getActivityID() {
-		return activityID;
-	}
+    public int getActivityID() {
+        return activityID;
+    }
 
-	public void setActivityID(int activityID) {
-		this.activityID = activityID;
-	}
+    public void setActivityID(int activityID) {
+        this.activityID = activityID;
+    }
 
-	public float getCostIndex() {
-		return costIndex;
-	}
+    public float getCostIndex() {
+        return costIndex;
+    }
 
-	public void setCostIndex(float costIndex) {
-		this.costIndex = costIndex;
-	}
+    public void setCostIndex(float costIndex) {
+        this.costIndex = costIndex;
+    }
 }

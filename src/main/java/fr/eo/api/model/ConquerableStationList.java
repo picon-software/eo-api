@@ -33,49 +33,49 @@ import java.util.List;
 @Root(strict = false)
 public class ConquerableStationList extends ApiResult {
 
-	private static final long serialVersionUID = -508261875818981165L;
+    private static final long serialVersionUID = -508261875818981165L;
 
-	@Element(required = false)
-	public Result result;
+    @Element(required = false)
+    public Result result;
 
-	private List<Station> stations;
+    private List<Station> stations;
 
-	public ConquerableStationList() {
-	}
+    public ConquerableStationList() {
+    }
 
-	@Root(strict = false)
-	public static final class Result {
-		@ElementList(entry = "row")
-		public List<Station> rowset;
-	}
+    @Root(strict = false)
+    public static final class Result {
+        @ElementList(entry = "row")
+        public List<Station> rowset;
+    }
 
-	@Root(strict = false)
-	public static final class Station {
-		@Attribute
-		public long stationID;
-		@Attribute
-		public String stationName;
-		@Attribute
-		public long stationTypeID;
-		@Attribute
-		public long solarSystemID;
-		@Attribute
-		public long corporationID;
-		@Attribute
-		public String corporationName;
-	}
+    @Root(strict = false)
+    public static final class Station {
+        @Attribute
+        public long stationID;
+        @Attribute
+        public String stationName;
+        @Attribute
+        public long stationTypeID;
+        @Attribute
+        public long solarSystemID;
+        @Attribute
+        public long corporationID;
+        @Attribute
+        public String corporationName;
+    }
 
-	@Commit
-	public void commit() {
-		stations = new ArrayList<>();
-		if (result != null) {
-			for (Station station : result.rowset) {
-				stations.add(station);
-			}
-		}
-	}
+    @Commit
+    public void commit() {
+        stations = new ArrayList<>();
+        if (result != null) {
+            for (Station station : result.rowset) {
+                stations.add(station);
+            }
+        }
+    }
 
-	public List<Station> getStations() {
-		return stations;
-	}
+    public List<Station> getStations() {
+        return stations;
+    }
 }

@@ -34,60 +34,60 @@ import java.util.Map;
 @Root(strict = false)
 public class AssetList extends ApiResult {
 
-	public static final int ASSET_FLAG_HANGAR = 4;
-	private static final long serialVersionUID = 6028784440525836602L;
+    public static final int ASSET_FLAG_HANGAR = 4;
+    private static final long serialVersionUID = 6028784440525836602L;
 
-	@Element(required = false)
-	public Result result;
+    @Element(required = false)
+    public Result result;
 
-	private Map<Long, Map<Long, Long>> assets;
+    private Map<Long, Map<Long, Long>> assets;
 
-	public AssetList() {
-	}
+    public AssetList() {
+    }
 
-	@Root(strict = false)
-	public static final class Result {
+    @Root(strict = false)
+    public static final class Result {
 
-		@ElementList(entry = "row")
-		public List<Asset> rowset;
-	}
+        @ElementList(entry = "row")
+        public List<Asset> rowset;
+    }
 
-	@Root(strict = false)
-	public static final class Asset {
+    @Root(strict = false)
+    public static final class Asset {
 
-		@Attribute(required = false)
-		public long locationID;
-		@Attribute
-		public long typeID;
-		@Attribute
-		public long quantity;
-		@Attribute
-		public long flag;
-		@ElementList(entry = "row", required = false)
-		public List<Asset> rowset;
-	}
+        @Attribute(required = false)
+        public long locationID;
+        @Attribute
+        public long typeID;
+        @Attribute
+        public long quantity;
+        @Attribute
+        public long flag;
+        @ElementList(entry = "row", required = false)
+        public List<Asset> rowset;
+    }
 
-	@Commit
-	public void commit() {
-		assets = new HashMap<>();
-		if (result != null && result.rowset != null) {
-			for (Asset asset : result.rowset) {
-				if (asset.flag == ASSET_FLAG_HANGAR) {
-					if (!assets.containsKey(asset.locationID)) {
-						assets.put(asset.locationID, new HashMap<Long, Long>());
-					}
-					if (assets.get(asset.locationID).containsKey(asset.typeID)) {
-						long newQuantity = assets.get(asset.locationID).get(asset.typeID) + asset.quantity;
-						assets.get(asset.locationID).put(asset.typeID, newQuantity);
-					} else {
-						assets.get(asset.locationID).put(asset.typeID, asset.quantity);
-					}
-				}
-			}
-		}
-	}
+    @Commit
+    public void commit() {
+        assets = new HashMap<>();
+        if (result != null && result.rowset != null) {
+            for (Asset asset : result.rowset) {
+                if (asset.flag == ASSET_FLAG_HANGAR) {
+                    if (!assets.containsKey(asset.locationID)) {
+                        assets.put(asset.locationID, new HashMap<Long, Long>());
+                    }
+                    if (assets.get(asset.locationID).containsKey(asset.typeID)) {
+                        long newQuantity = assets.get(asset.locationID).get(asset.typeID) + asset.quantity;
+                        assets.get(asset.locationID).put(asset.typeID, newQuantity);
+                    } else {
+                        assets.get(asset.locationID).put(asset.typeID, asset.quantity);
+                    }
+                }
+            }
+        }
+    }
 
-	public Map<Long, Map<Long, Long>> getAssets() {
-		return assets;
-	}
+    public Map<Long, Map<Long, Long>> getAssets() {
+        return assets;
+    }
 }

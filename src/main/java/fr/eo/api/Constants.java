@@ -23,12 +23,12 @@ package fr.eo.api;
  */
 public final class Constants {
 
-	public static final String CREST_API_ENDPOINT_URL =
-			"http://public-crest.eveonline.com";
+    public static final String CREST_API_ENDPOINT_URL =
+            "http://public-crest.eveonline.com";
 
-	public static final String EVE_ONLINE_API_ENDPOINT_URL =
-			"https://api.eveonline.com";
+    public static final String EVE_ONLINE_API_ENDPOINT_URL =
+            "https://api.eveonline.com";
 
-	private Constants() {
-	}
+    private Constants() {
+    }
 }

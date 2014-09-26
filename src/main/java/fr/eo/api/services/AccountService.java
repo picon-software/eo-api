@@ -29,17 +29,17 @@ import retrofit.http.Query;
  */
 public interface AccountService {
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/account/APIKeyInfo.xml.aspx")
-	ApiKeyInfo apiKeyInfo(
-			@Query("keyID") long keyID,
-			@Query("vCode") String vCode);
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/account/APIKeyInfo.xml.aspx")
+    ApiKeyInfo apiKeyInfo(
+            @Query("keyID") long keyID,
+            @Query("vCode") String vCode);
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/account/APIKeyInfo.xml.aspx")
-	void apiKeyInfo(
-			@Query("keyID") long keyID,
-			@Query("vCode") String vCode,
-			Callback<ApiKeyInfo> callback);
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/account/APIKeyInfo.xml.aspx")
+    void apiKeyInfo(
+            @Query("keyID") long keyID,
+            @Query("vCode") String vCode,
+            Callback<ApiKeyInfo> callback);
 
 }

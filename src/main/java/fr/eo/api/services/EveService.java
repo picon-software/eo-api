@@ -27,8 +27,8 @@ import retrofit.http.Headers;
  */
 public interface EveService {
 
-	@Headers("User-Agent: Eve online industrial tool")
-	@GET("/eve/ConquerableStationList.xml.aspx")
-	ConquerableStationList conquerableStationList();
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/eve/ConquerableStationList.xml.aspx")
+    ConquerableStationList conquerableStationList();
 
 }

@@ -27,16 +27,16 @@ import retrofit.http.Query;
  * @author picon.software
  */
 public interface EveCentralAPI {
-	String URL = "http://api.eve-central.com";
+    String URL = "http://api.eve-central.com";
 
-	@Headers({"Cache-Control: max-age=3600",
-			"User-Agent: Eve online industrial tool"})
-	@GET("/api/marketstat")
-	MarketStat marketstatFull(@Query("hours") Integer hours, @Query("minQ") Integer minQ, @Query("regionlimit") Integer regionlimit, @Query("usesystem") Integer usesystem, @Query("typeid") Integer... typeid);
+    @Headers({"Cache-Control: max-age=3600",
+            "User-Agent: Eve online industrial tool"})
+    @GET("/api/marketstat")
+    MarketStat marketstatFull(@Query("hours") Integer hours, @Query("minQ") Integer minQ, @Query("regionlimit") Integer regionlimit, @Query("usesystem") Integer usesystem, @Query("typeid") Integer... typeid);
 
-	@Headers({"Cache-Control: max-age=60",
-			"User-Agent: Eve online industrial tool"})
-	@GET("/api/marketstat")
-	MarketStat marketstat(@Query("regionlimit") Integer regionlimit, @Query("usesystem") Integer usesystem, @Query("typeid") Integer... typeid);
+    @Headers({"Cache-Control: max-age=60",
+            "User-Agent: Eve online industrial tool"})
+    @GET("/api/marketstat")
+    MarketStat marketstat(@Query("regionlimit") Integer regionlimit, @Query("usesystem") Integer usesystem, @Query("typeid") Integer... typeid);
 
 }

@@ -34,59 +34,59 @@ import java.util.Map;
 @Root(strict = false)
 public class Standings extends ApiResult {
 
-	private static final long serialVersionUID = -7574836860681161750L;
+    private static final long serialVersionUID = -7574836860681161750L;
 
-	@Element(required = false)
-	public Result result;
+    @Element(required = false)
+    public Result result;
 
-	private Map<Long, Float> standings;
+    private Map<Long, Float> standings;
 
-	public Standings() {
-	}
+    public Standings() {
+    }
 
-	@Root(strict = false)
-	public static final class Result {
+    @Root(strict = false)
+    public static final class Result {
 
-		@ElementList(entry = "rowset")
-		public List<NpcStandings> characterNPCStandings;
-	}
+        @ElementList(entry = "rowset")
+        public List<NpcStandings> characterNPCStandings;
+    }
 
-	@Root(strict = false)
-	public static final class NpcStandings {
+    @Root(strict = false)
+    public static final class NpcStandings {
 
-		@Attribute
-		public String name;
+        @Attribute
+        public String name;
 
-		@ElementList(entry = "row", required = false, inline = true)
-		public List<Standing> row;
-	}
+        @ElementList(entry = "row", required = false, inline = true)
+        public List<Standing> row;
+    }
 
-	@Root(strict = false)
-	public static final class Standing {
+    @Root(strict = false)
+    public static final class Standing {
 
-		@Attribute
-		public long fromID;
-		@Attribute
-		public float standing;
-	}
+        @Attribute
+        public long fromID;
+        @Attribute
+        public float standing;
+    }
 
 
-	@Commit
-	public void commit() {
-		standings = new HashMap<>();
+    @Commit
+    public void commit() {
+        standings = new HashMap<>();
 
-		if(result != null && result.characterNPCStandings != null) {
-			for (NpcStandings characterNPCStanding : result.characterNPCStandings) {
-				if(characterNPCStanding.row != null) {
-					for (Standing standing : characterNPCStanding.row) {
-						standings.put(standing.fromID, standing.standing);
-					}
-				}
-			}
-		}
-	}
+        if (result != null && result.characterNPCStandings != null) {
+            for (NpcStandings characterNPCStanding : result.characterNPCStandings) {
+                if (characterNPCStanding.row != null) {
+                    for (Standing standing : characterNPCStanding.row) {
+                        standings.put(standing.fromID, standing.standing);
+                    }
+                }
+            }
+        }
+    }
 
-	public Map<Long, Float> getStandings() {
-		return standings;
-	}
+    public Map<Long, Float> getStandings() {
+        return standings;
+    }
 }

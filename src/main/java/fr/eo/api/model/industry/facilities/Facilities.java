@@ -23,31 +23,31 @@ import java.util.List;
 
 public class Facilities {
 
-	private List<Item> items = new ArrayList<>();
-	private int pageCount;
-	private int totalCount;
+    private List<Item> items = new ArrayList<>();
+    private int pageCount;
+    private int totalCount;
 
-	public List<Item> getItems() {
-		return items;
-	}
+    public List<Item> getItems() {
+        return items;
+    }
 
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
 
-	public int getPageCount() {
-		return pageCount;
-	}
+    public int getPageCount() {
+        return pageCount;
+    }
 
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
-	}
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
 
-	public int getTotalCount() {
-		return totalCount;
-	}
+    public int getTotalCount() {
+        return totalCount;
+    }
 
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
 }

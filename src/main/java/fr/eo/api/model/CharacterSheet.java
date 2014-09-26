@@ -34,72 +34,72 @@ import java.util.Map;
 @Root(strict = false)
 public class CharacterSheet extends ApiResult {
 
-	private static final long serialVersionUID = -3100515266562778698L;
+    private static final long serialVersionUID = -3100515266562778698L;
 
-	@Element(required = false)
-	public Result result;
+    @Element(required = false)
+    public Result result;
 
-	private Map<Long, Short> skills;
-	public long characterID;
+    private Map<Long, Short> skills;
+    public long characterID;
 
-	public CharacterSheet() {
-	}
+    public CharacterSheet() {
+    }
 
-	@Root(strict = false)
-	public static final class Result {
-		@Element
-		public long characterID;
-		@Element
-		public String name;
-		@Element
-		public String corporationName;
-		@Element
-		public long corporationID;
-		@Element(required = false)
-		public String allianceName;
-		@Element(required = false)
-		public long allianceID;
-		@ElementList(inline = true, entry = "rowset")
-		public List<Rowset> rowsets;
-	}
+    @Root(strict = false)
+    public static final class Result {
+        @Element
+        public long characterID;
+        @Element
+        public String name;
+        @Element
+        public String corporationName;
+        @Element
+        public long corporationID;
+        @Element(required = false)
+        public String allianceName;
+        @Element(required = false)
+        public long allianceID;
+        @ElementList(inline = true, entry = "rowset")
+        public List<Rowset> rowsets;
+    }
 
-	@Root(strict = false)
-	public static final class Rowset {
-		@Attribute
-		public String name;
-		@ElementList(inline = true, entry = "row", required = false)
-		public List<Skill> rows;
-	}
+    @Root(strict = false)
+    public static final class Rowset {
+        @Attribute
+        public String name;
+        @ElementList(inline = true, entry = "row", required = false)
+        public List<Skill> rows;
+    }
 
-	@Root(strict = false)
-	public static final class Skill {
-		@Attribute(required = false)
-		public long typeID;
-		@Attribute(required = false)
-		public long skillpoints;
-		@Attribute(required = false)
-		public short level;
-		@Attribute(required = false)
-		public int published;
-	}
+    @Root(strict = false)
+    public static final class Skill {
+        @Attribute(required = false)
+        public long typeID;
+        @Attribute(required = false)
+        public long skillpoints;
+        @Attribute(required = false)
+        public short level;
+        @Attribute(required = false)
+        public int published;
+    }
 
-	@Commit
-	public void commit() {
-		skills = new HashMap<>();
-		if (result != null) {
-			for (Rowset rowset : result.rowsets) {
-				if ("skills".equals(rowset.name)) {
-					for (Skill skill : rowset.rows) {
-						if (skill.published == 1) {
-							skills.put(skill.typeID, skill.level);
-						}
-					}
-				}
-			}
-		}
-	}
+    @Commit
+    public void commit() {
+        skills = new HashMap<>();
+        if (result != null) {
+            for (Rowset rowset : result.rowsets) {
+                if ("skills".equals(rowset.name)) {
+                    for (Skill skill : rowset.rows) {
+                        if (skill.published == 1) {
+                            skills.put(skill.typeID, skill.level);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	public Map<Long, Short> getSkills() {
-		return skills;
-	}
+    public Map<Long, Short> getSkills() {
+        return skills;
+    }
 }

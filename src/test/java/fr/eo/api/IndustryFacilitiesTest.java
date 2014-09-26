@@ -20,16 +20,14 @@ package fr.eo.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.industry.facilities.Facilities;
+import fr.eo.api.services.IndustryService;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.industry.facilities.Facilities;
-import fr.eo.api.services.IndustryService;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -38,24 +36,24 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class IndustryFacilitiesTest extends AbstractTest {
 
-	@Test
-	public void fromJson() throws FileNotFoundException {
-		Gson gson = new GsonBuilder().create();
-		Facilities facilities = gson.fromJson(new InputStreamReader(getResource("crest-industry-facilities.json")),
-				Facilities.class);
+    @Test
+    public void fromJson() throws FileNotFoundException {
+        Gson gson = new GsonBuilder().create();
+        Facilities facilities = gson.fromJson(new InputStreamReader(getResource("crest-industry-facilities.json")),
+                Facilities.class);
 
-		assertThat(facilities).isNotNull();
-	}
+        assertThat(facilities).isNotNull();
+    }
 
-	@Ignore
-	@Test
-	public void live() {
-		IndustryService industryService = new Manager().industryService();
+    @Ignore
+    @Test
+    public void live() {
+        IndustryService industryService = new Manager().industryService();
 
-		Facilities facilities = industryService.facilities();
+        Facilities facilities = industryService.facilities();
 
-		assertThat(facilities).isNotNull();
-		assertThat(facilities.getItems()).isNotNull().isNotEmpty()
-				.hasSize(facilities.getTotalCount());
-	}
+        assertThat(facilities).isNotNull();
+        assertThat(facilities.getItems()).isNotNull().isNotEmpty()
+                .hasSize(facilities.getTotalCount());
+    }
 }

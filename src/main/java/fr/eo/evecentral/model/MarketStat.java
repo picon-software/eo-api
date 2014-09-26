@@ -34,62 +34,41 @@ import java.util.Map;
 @Root(strict = false)
 public class MarketStat {
 
-	@ElementList(name = "marketstat", entry = "type")
-	public List<Type> types;
+    @ElementList(name = "marketstat", entry = "type")
+    public List<Type> types;
 
-	private Map<Integer, Type> typeMap;
+    private Map<Integer, Type> typeMap;
 
-//	private List<PriceBean> prices;
+    @Root(strict = false)
+    public static final class Type {
+        @Attribute
+        public int id;
+        @Element
+        public PriceInfo buy;
+        @Element
+        public PriceInfo sell;
+    }
 
-	@Root(strict = false)
-	public static final class Type {
-		@Attribute
-		public int id;
-		@Element
-		public PriceInfo buy;
-		@Element
-		public PriceInfo sell;
-	}
+    @Root(strict = false)
+    public static final class PriceInfo {
+        @Element
+        public long volume;
+        @Element
+        public double max;
+        @Element
+        public double min;
+    }
 
-	@Root(strict = false)
-	public static final class PriceInfo {
-		@Element
-		public long volume;
-		@Element
-		public double max;
-		@Element
-		public double min;
-	}
+    @Commit
+    public void commit() {
+        typeMap = new HashMap<>();
 
-	@Commit
-	public void commit() {
-		typeMap = new HashMap<>();
+        for (Type type : types) {
+            typeMap.put(type.id, type);
+        }
+    }
 
-		for (Type type : types) {
-			typeMap.put(type.id, type);
-		}
-	}
-
-	public Type getTypeById(int id) {
-		return typeMap.get(id);
-	}
-
-//	@Commit
-//	public void commit() {
-//		prices = new ArrayList<PriceBean>();
-//		for (Type type : types) {
-//			PriceBean bean = new PriceBean();
-//			bean.itemId = type.id;
-//			bean.buyPrice = type.buy.max;
-//			bean.buyVolume = type.buy.volume;
-//			bean.sellPrice = type.sell.min;
-//			bean.sellVolume = type.sell.volume;
-//
-//			prices.add(bean);
-//		}
-//	}
-//
-//	public List<PriceBean> getPrices() {
-//		return prices;
-//	}
+    public Type getTypeById(int id) {
+        return typeMap.get(id);
+    }
 }

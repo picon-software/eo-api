@@ -28,19 +28,19 @@ import java.util.Date;
  * @author picon.software
  */
 public class DateFormatTransformer implements Transform<Date> {
-	private DateFormat dateFormat;
+    private DateFormat dateFormat;
 
-	public DateFormatTransformer(String dateFormat) {
-		this.dateFormat = new SimpleDateFormat(dateFormat);
-	}
+    public DateFormatTransformer(String dateFormat) {
+        this.dateFormat = new SimpleDateFormat(dateFormat);
+    }
 
-	@Override
-	public Date read(String value) throws Exception {
-		return dateFormat.parse(value);
-	}
+    @Override
+    public Date read(String value) throws Exception {
+        return dateFormat.parse(value);
+    }
 
-	@Override
-	public String write(Date value) throws Exception {
-		return dateFormat.format(value);
-	}
+    @Override
+    public String write(Date value) throws Exception {
+        return dateFormat.format(value);
+    }
 }

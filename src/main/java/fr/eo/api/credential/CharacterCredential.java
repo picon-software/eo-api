@@ -23,22 +23,22 @@ package fr.eo.api.credential;
  */
 public class CharacterCredential extends ApiCredential {
 
-	public static final CharacterCredential LEVEL_5_CHAR = new CharacterCredential(-1L, null, -1L);
+    public static final CharacterCredential LEVEL_5_CHAR = new CharacterCredential(-1L, null, -1L);
 
-	public long characterId;
+    public long characterId;
 
-	public CharacterCredential(long keyId, String vCode, long characterId) {
-		super(keyId, vCode);
-		this.characterId = characterId;
-	}
+    public CharacterCredential(long keyId, String vCode, long characterId) {
+        super(keyId, vCode);
+        this.characterId = characterId;
+    }
 
-	public boolean isLevel5Char() {
-		return keyId == -1L && vCode == null && characterId == -1L;
-	}
+    public boolean isLevel5Char() {
+        return keyId == -1L && vCode == null && characterId == -1L;
+    }
 
-	@Override
-	public String getKey() {
-		return keyId + vCode + characterId;
-	}
+    @Override
+    public String getKey() {
+        return keyId + vCode + characterId;
+    }
 
 }

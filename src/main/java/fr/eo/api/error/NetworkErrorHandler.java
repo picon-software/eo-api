@@ -22,8 +22,8 @@ import retrofit.RetrofitError;
 
 public interface NetworkErrorHandler {
 
-	void onNoInternetError(RetrofitError cause);
+    void onNoInternetError(RetrofitError cause);
 
-	void onTimeOutError(RetrofitError cause);
+    void onTimeOutError(RetrofitError cause);
 
 }

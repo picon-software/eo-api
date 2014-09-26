@@ -18,27 +18,27 @@
 
 package fr.eo.api.model.industry.system;
 
-import java.util.List;
-
 import fr.eo.api.model.industry.SolarSystem;
 
+import java.util.List;
+
 public class Items {
-	private SolarSystem solarSystem;
-	private List<SystemCostIndices> systemCostIndices;
+    private SolarSystem solarSystem;
+    private List<SystemCostIndices> systemCostIndices;
 
-	public SolarSystem getSolarSystem() {
-		return this.solarSystem;
-	}
+    public SolarSystem getSolarSystem() {
+        return this.solarSystem;
+    }
 
-	public void setSolarSystem(SolarSystem solarSystem) {
-		this.solarSystem = solarSystem;
-	}
+    public void setSolarSystem(SolarSystem solarSystem) {
+        this.solarSystem = solarSystem;
+    }
 
-	public List<SystemCostIndices> getSystemCostIndices() {
-		return this.systemCostIndices;
-	}
+    public List<SystemCostIndices> getSystemCostIndices() {
+        return this.systemCostIndices;
+    }
 
-	public void setSystemCostIndices(List<SystemCostIndices> systemCostIndices) {
-		this.systemCostIndices = systemCostIndices;
-	}
+    public void setSystemCostIndices(List<SystemCostIndices> systemCostIndices) {
+        this.systemCostIndices = systemCostIndices;
+    }
 }

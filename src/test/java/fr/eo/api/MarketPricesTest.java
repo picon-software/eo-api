@@ -20,16 +20,14 @@ package fr.eo.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.market.prices.Prices;
+import fr.eo.api.services.MarketService;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.market.prices.Prices;
-import fr.eo.api.services.MarketService;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -38,24 +36,24 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class MarketPricesTest extends AbstractTest {
 
-	@Test
-	public void fromJson() throws FileNotFoundException {
-		Gson gson = new GsonBuilder().create();
-		Prices prices = gson.fromJson(new InputStreamReader(getResource("crest-market-prices.json")),
-				Prices.class);
+    @Test
+    public void fromJson() throws FileNotFoundException {
+        Gson gson = new GsonBuilder().create();
+        Prices prices = gson.fromJson(new InputStreamReader(getResource("crest-market-prices.json")),
+                Prices.class);
 
-		assertThat(prices).isNotNull();
-	}
+        assertThat(prices).isNotNull();
+    }
 
-	@Ignore
-	@Test
-	public void live() {
-		MarketService marketService = new Manager().marketService();
+    @Ignore
+    @Test
+    public void live() {
+        MarketService marketService = new Manager().marketService();
 
-		Prices prices = marketService.prices();
+        Prices prices = marketService.prices();
 
-		assertThat(prices).isNotNull();
-		assertThat(prices.getItems()).isNotNull().isNotEmpty()
-				.hasSize(prices.getTotalCount());
-	}
+        assertThat(prices).isNotNull();
+        assertThat(prices.getItems()).isNotNull().isNotEmpty()
+                .hasSize(prices.getTotalCount());
+    }
 }

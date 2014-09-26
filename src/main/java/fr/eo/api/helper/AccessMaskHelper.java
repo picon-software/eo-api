@@ -23,11 +23,11 @@ package fr.eo.api.helper;
  */
 public class AccessMaskHelper {
 
-	public static final long CHARACTER_SHEET = 8L;
-	public static final long ASSET_LIST = 2L;
-	public static final long STANDINGS = 524288L;
+    public static final long CHARACTER_SHEET = 8L;
+    public static final long ASSET_LIST = 2L;
+    public static final long STANDINGS = 524288L;
 
-	public static boolean isAccessible(long accessMask, long endpointFlag) {
-		return (accessMask & endpointFlag) > 1;
-	}
+    public static boolean isAccessible(long accessMask, long endpointFlag) {
+        return (accessMask & endpointFlag) > 1;
+    }
 }

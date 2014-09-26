@@ -20,32 +20,32 @@ package fr.eo.api.model.industry.facilities;
 
 public class Owner {
 
-	private long id;
-	private boolean isNPC;
-	private String name;
+    private long id;
+    private boolean isNPC;
+    private String name;
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public boolean isIsNPC() {
-		return isNPC;
-	}
+    public boolean isIsNPC() {
+        return isNPC;
+    }
 
-	public void setIsNPC(boolean isNPC) {
-		this.isNPC = isNPC;
-	}
+    public void setIsNPC(boolean isNPC) {
+        this.isNPC = isNPC;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

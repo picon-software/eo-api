@@ -18,30 +18,30 @@
 
 package fr.eo.api.error;
 
-import java.net.SocketTimeoutException;
-
 import retrofit.ErrorHandler;
 import retrofit.RetrofitError;
 
+import java.net.SocketTimeoutException;
+
 public class DefaultErrorHandler implements ErrorHandler {
 
-	private NetworkErrorHandler handler;
+    private NetworkErrorHandler handler;
 
-	public DefaultErrorHandler(NetworkErrorHandler handler) {
-		this.handler = handler;
-	}
+    public DefaultErrorHandler(NetworkErrorHandler handler) {
+        this.handler = handler;
+    }
 
-	@Override
-	public Throwable handleError(RetrofitError cause) {
-		if(cause.isNetworkError()) {
-			if(cause.getCause() instanceof SocketTimeoutException) {
-				handler.onTimeOutError(cause);
-			} else {
-				handler.onNoInternetError(cause);
-			}
-		}
-		return cause;
-	}
+    @Override
+    public Throwable handleError(RetrofitError cause) {
+        if (cause.isNetworkError()) {
+            if (cause.getCause() instanceof SocketTimeoutException) {
+                handler.onTimeOutError(cause);
+            } else {
+                handler.onNoInternetError(cause);
+            }
+        }
+        return cause;
+    }
 
 
 }

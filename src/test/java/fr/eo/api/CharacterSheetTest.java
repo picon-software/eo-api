@@ -18,6 +18,10 @@
 
 package fr.eo.api;
 
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.CharacterSheet;
+import fr.eo.api.services.CharacterService;
+import fr.eo.api.util.DateFormatTransformer;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
@@ -27,11 +31,6 @@ import org.simpleframework.xml.transform.RegistryMatcher;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.CharacterSheet;
-import fr.eo.api.services.CharacterService;
-import fr.eo.api.util.DateFormatTransformer;
-
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -40,43 +39,43 @@ import static org.junit.Assert.fail;
  */
 public class CharacterSheetTest extends AbstractTest {
 
-	@Test
-	public void serializer() {
-		RegistryMatcher m = new RegistryMatcher();
-		m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
+    @Test
+    public void serializer() {
+        RegistryMatcher m = new RegistryMatcher();
+        m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
 
-		Serializer serializer = new Persister(m);
+        Serializer serializer = new Persister(m);
 
-		try {
-			CharacterSheet eveApi = serializer.read(CharacterSheet.class,
-					getResource("eveapi-char-sheet-test.xml"));
+        try {
+            CharacterSheet eveApi = serializer.read(CharacterSheet.class,
+                    getResource("eveapi-char-sheet-test.xml"));
 
-			assertThat(eveApi).isNotNull();
-			assertThat(eveApi.getSkills()).isNotNull().isNotEmpty();
+            assertThat(eveApi).isNotNull();
+            assertThat(eveApi.getSkills()).isNotNull().isNotEmpty();
 
-			assertThat(eveApi.getSkills()).containsKey(3431L);
-			assertThat(eveApi.getSkills().get(3431L)).isEqualTo((short) 3);
+            assertThat(eveApi.getSkills()).containsKey(3431L);
+            assertThat(eveApi.getSkills().get(3431L)).isEqualTo((short) 3);
 
-			assertThat(eveApi.getSkills()).doesNotContainKey(3445L);
+            assertThat(eveApi.getSkills()).doesNotContainKey(3445L);
 
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-	}
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
-	@Ignore
-	@Test
-	public void live() throws FileNotFoundException {
+    @Ignore
+    @Test
+    public void live() throws FileNotFoundException {
 
-		CharacterService characterService = new Manager().characterService();
+        CharacterService characterService = new Manager().characterService();
 
-		TestCredential testCredential = getCredential();
+        TestCredential testCredential = getCredential();
 
-		CharacterSheet characterSheet =
-				characterService.characterSheet(testCredential.keyID,
-						testCredential.vCode, testCredential.characterID);
+        CharacterSheet characterSheet =
+                characterService.characterSheet(testCredential.keyID,
+                        testCredential.vCode, testCredential.characterID);
 
-		assertThat(characterSheet).isNotNull();
-		assertThat(characterSheet.getSkills()).isNotNull().isNotEmpty();
-	}
+        assertThat(characterSheet).isNotNull();
+        assertThat(characterSheet.getSkills()).isNotNull().isNotEmpty();
+    }
 }

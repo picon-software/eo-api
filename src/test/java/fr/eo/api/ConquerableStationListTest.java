@@ -18,6 +18,10 @@
 
 package fr.eo.api;
 
+import fr.eo.api.manager.Manager;
+import fr.eo.api.model.ConquerableStationList;
+import fr.eo.api.services.EveService;
+import fr.eo.api.util.DateFormatTransformer;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
@@ -25,11 +29,6 @@ import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.RegistryMatcher;
 
 import java.util.Date;
-
-import fr.eo.api.manager.Manager;
-import fr.eo.api.model.ConquerableStationList;
-import fr.eo.api.services.EveService;
-import fr.eo.api.util.DateFormatTransformer;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -39,46 +38,46 @@ import static org.junit.Assert.fail;
  */
 public class ConquerableStationListTest extends AbstractTest {
 
-	@Test
-	public void serializer() {
-		RegistryMatcher m = new RegistryMatcher();
-		m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
+    @Test
+    public void serializer() {
+        RegistryMatcher m = new RegistryMatcher();
+        m.bind(Date.class, new DateFormatTransformer("yyyy-MM-dd HH:mm:ss"));
 
-		Serializer serializer = new Persister(m);
+        Serializer serializer = new Persister(m);
 
-		try {
-			ConquerableStationList eveApi = serializer.read(ConquerableStationList.class,
-					getResource("eveapi-conquerable-station-test.xml"));
+        try {
+            ConquerableStationList eveApi = serializer.read(ConquerableStationList.class,
+                    getResource("eveapi-conquerable-station-test.xml"));
 
-			assertThat(eveApi).isNotNull();
-			assertThat(eveApi.getStations()).isNotNull().isNotEmpty().hasSize(829);
+            assertThat(eveApi).isNotNull();
+            assertThat(eveApi.getStations()).isNotNull().isNotEmpty().hasSize(829);
 
-			assertThat(eveApi.getStations().get(0).stationID).isEqualTo(61000527);
-			assertThat(eveApi.getStations().get(0).stationName)
-					.isEqualTo("KV-8SN VIII - Dont Refine Here Idiot");
-			assertThat(eveApi.getStations().get(0).stationTypeID)
-					.isEqualTo(21645);
-			assertThat(eveApi.getStations().get(0).solarSystemID)
-					.isEqualTo(30004348);
+            assertThat(eveApi.getStations().get(0).stationID).isEqualTo(61000527);
+            assertThat(eveApi.getStations().get(0).stationName)
+                    .isEqualTo("KV-8SN VIII - Dont Refine Here Idiot");
+            assertThat(eveApi.getStations().get(0).stationTypeID)
+                    .isEqualTo(21645);
+            assertThat(eveApi.getStations().get(0).solarSystemID)
+                    .isEqualTo(30004348);
 
-			for (ConquerableStationList.Station station : eveApi.getStations()) {
-				assertThat(station.stationID).isGreaterThan(0);
-			}
+            for (ConquerableStationList.Station station : eveApi.getStations()) {
+                assertThat(station.stationID).isGreaterThan(0);
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
 
-	@Ignore
-	@Test
-	public void live() {
-		EveService eveService = new Manager().eveService();
+    @Ignore
+    @Test
+    public void live() {
+        EveService eveService = new Manager().eveService();
 
-		ConquerableStationList stationList = eveService.conquerableStationList();
+        ConquerableStationList stationList = eveService.conquerableStationList();
 
-		assertThat(stationList).isNotNull();
-		assertThat(stationList.getStations()).isNotNull().isNotEmpty();
-	}
+        assertThat(stationList).isNotNull();
+        assertThat(stationList.getStations()).isNotNull().isNotEmpty();
+    }
 }

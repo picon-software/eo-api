@@ -21,31 +21,31 @@ package fr.eo.api.model.industry.system;
 import java.util.List;
 
 public class System {
-	private List<Items> items;
-	private int pageCount;
-	private int totalCount;
+    private List<Items> items;
+    private int pageCount;
+    private int totalCount;
 
-	public List<Items> getItems() {
-		return this.items;
-	}
+    public List<Items> getItems() {
+        return this.items;
+    }
 
-	public void setItems(List<Items> items) {
-		this.items = items;
-	}
+    public void setItems(List<Items> items) {
+        this.items = items;
+    }
 
-	public int getPageCount() {
-		return pageCount;
-	}
+    public int getPageCount() {
+        return pageCount;
+    }
 
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
-	}
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
 
-	public int getTotalCount() {
-		return totalCount;
-	}
+    public int getTotalCount() {
+        return totalCount;
+    }
 
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
 }
