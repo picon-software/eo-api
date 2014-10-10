@@ -150,15 +150,5 @@
           <artifactId>assertj-core</artifactId>
           <version>${assertj.version}</version>
         </dependency>
-        <dependency>
-          <groupId>org.assertj</groupId>
-          <artifactId>assertj-guava</artifactId>
-          <version>${assertj-guava.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.assertj</groupId>
-          <artifactId>assertj-joda-time</artifactId>
-          <version>${assertj-joda-time.version}</version>
-        </dependency>
 	</dependencies>
 </project>
