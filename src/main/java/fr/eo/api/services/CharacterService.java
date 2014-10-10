@@ -20,6 +20,7 @@ package fr.eo.api.services;
 
 import fr.eo.api.model.AssetList;
 import fr.eo.api.model.CharacterSheet;
+import fr.eo.api.model.Jobs;
 import fr.eo.api.model.Standings;
 import retrofit.http.GET;
 import retrofit.http.Headers;
@@ -48,6 +49,13 @@ public interface CharacterService {
     @Headers("User-Agent: Eve online industrial tool")
     @GET("/char/Standings.xml.aspx")
     Standings standings(
+            @Query("keyID") long keyID,
+            @Query("vCode") String vCode,
+            @Query("characterID") long characterID);
+
+    @Headers("User-Agent: Eve online industrial tool")
+    @GET("/char/IndustryJobs.xml.aspx")
+    Jobs industryJobs(
             @Query("keyID") long keyID,
             @Query("vCode") String vCode,
             @Query("characterID") long characterID);
