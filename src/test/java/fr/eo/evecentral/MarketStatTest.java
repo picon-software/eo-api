@@ -30,7 +30,7 @@ import retrofit.converter.SimpleXMLConverter;
 
 import java.io.IOException;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author picon.software

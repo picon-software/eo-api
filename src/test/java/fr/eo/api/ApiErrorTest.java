@@ -39,7 +39,7 @@ import java.net.Proxy;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;

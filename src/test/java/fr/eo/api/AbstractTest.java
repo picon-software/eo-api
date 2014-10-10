@@ -20,7 +20,7 @@ package fr.eo.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.fest.assertions.api.Assertions;
+import org.assertj.core.api.Assertions;
 
 import java.io.File;
 import java.io.FileInputStream;

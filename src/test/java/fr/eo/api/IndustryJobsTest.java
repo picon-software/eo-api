@@ -20,6 +20,7 @@ package fr.eo.api;
 
 import fr.eo.api.manager.Manager;
 import fr.eo.api.model.AssetList;
+import fr.eo.api.model.Jobs;
 import fr.eo.api.services.CharacterService;
 import fr.eo.api.util.DateFormatTransformer;
 import org.junit.Ignore;
@@ -31,7 +32,7 @@ import org.simpleframework.xml.transform.RegistryMatcher;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 /**
@@ -47,17 +48,14 @@ public class IndustryJobsTest extends AbstractTest {
         Serializer serializer = new Persister(m);
 
         try {
-            AssetList eveApi = serializer.read(AssetList.class,
-                    getResource("eveapi-char-asset-list-test.xml"));
+            Jobs eveApi = serializer.read(Jobs.class,
+                    getResource("eveapi-char-industry-jobs.xml"));
 
             assertThat(eveApi).isNotNull();
-            assertThat(eveApi.getAssets()).isNotNull().isNotEmpty().containsKey(60011314L);
+            assertThat(eveApi.getJobs()).isNotNull().isNotEmpty();
 
-            assertThat(eveApi.getAssets().get(60011314L)).containsKey(12822L);
-            assertThat(eveApi.getAssets().get(60011314L).get(12822L)).isEqualTo(6L);
-
-            assertThat(eveApi.getAssets().get(60011314L)).containsKey(3025L);
-            assertThat(eveApi.getAssets().get(60011314L).get(3025L)).isEqualTo(6L);
+			Jobs.Job job = eveApi.getJobs().get(0);
+			assertThat(job.facilityID).isEqualTo(60006382);
 
         } catch (Exception e) {
             e.printStackTrace();

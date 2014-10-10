@@ -29,7 +29,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author picon.software

@@ -17,6 +17,7 @@
   ~ with this program; if not, write to the Free Software Foundation, Inc.,
   ~ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
   -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -42,6 +43,9 @@
 
         <!-- Test Dependencies -->
         <junit.version>4.11</junit.version>
+        <assertj.version>1.5.0</assertj.version>
+        <assertj-guava.version>1.1.0</assertj-guava.version>
+        <assertj-joda-time.version>1.1.0</assertj-joda-time.version>
     </properties>
 
     <scm>
@@ -141,11 +145,20 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert-core</artifactId>
-			<version>2.0M8</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-core</artifactId>
+          <version>${assertj.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-guava</artifactId>
+          <version>${assertj-guava.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-joda-time</artifactId>
+          <version>${assertj-joda-time.version}</version>
+        </dependency>
 	</dependencies>
 </project>

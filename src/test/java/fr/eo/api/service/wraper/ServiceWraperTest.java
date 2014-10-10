@@ -26,7 +26,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Date;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author picon.software
@@ -37,7 +37,7 @@ public class ServiceWraperTest {
 
     @BeforeClass
     public static void beforeTest() {
-        cacheDir = org.fest.util.Files.newTemporaryFolder();
+        cacheDir = org.assertj.core.util.Files.newTemporaryFolder();
     }
 
     @Test

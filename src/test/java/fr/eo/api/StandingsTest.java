@@ -31,8 +31,8 @@ import org.simpleframework.xml.transform.RegistryMatcher;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 import static org.junit.Assert.fail;
 
 /**
