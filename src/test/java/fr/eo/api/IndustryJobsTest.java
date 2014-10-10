@@ -52,10 +52,18 @@ public class IndustryJobsTest extends AbstractTest {
                     getResource("eveapi-char-industry-jobs.xml"));
 
             assertThat(eveApi).isNotNull();
-            assertThat(eveApi.getJobs()).isNotNull().isNotEmpty();
-
-			Jobs.Job job = eveApi.getJobs().get(0);
-			assertThat(job.facilityID).isEqualTo(60006382);
+            assertThat(eveApi.getJobs()).isNotNull().isNotEmpty()
+                    .extracting("facilityID").contains(60006382L, 1015338129652L, 1015338129650L);
+            assertThat(eveApi.getJobs())
+                    .extracting("stationID").contains(60006382L, 1015338119317L);
+            assertThat(eveApi.getJobs())
+                    .extracting("solarSystemID").contains(30005194L, 30005195L);
+            assertThat(eveApi.getJobs())
+                    .extracting("activityID").contains(1L, 3L, 4L, 5L, 7L, 8L);
+            assertThat(eveApi.getJobs())
+                    .extracting("blueprintTypeID").contains(2047L, 25862L, 785L, 10040L, 30614L, 1137L);
+            assertThat(eveApi.getJobs())
+                    .extracting("endDate").contains(new Date(1405778174000L));
 
         } catch (Exception e) {
             e.printStackTrace();
