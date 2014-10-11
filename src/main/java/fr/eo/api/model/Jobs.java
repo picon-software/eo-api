@@ -63,6 +63,8 @@ public class Jobs extends ApiResult {
         @Attribute
         public long blueprintTypeID;
         @Attribute
+        public Date startDate;
+        @Attribute
         public Date endDate;
     }
 
