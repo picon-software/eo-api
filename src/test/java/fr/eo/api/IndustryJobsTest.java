@@ -62,8 +62,7 @@ public class IndustryJobsTest extends AbstractTest {
                     .extracting("activityID").contains(1L, 3L, 4L, 5L, 7L, 8L);
             assertThat(eveApi.getJobs())
                     .extracting("blueprintTypeID").contains(2047L, 25862L, 785L, 10040L, 30614L, 1137L);
-            assertThat(eveApi.getJobs())
-                    .extracting("endDate").contains(new Date(1405778174000L));
+            assertThat(eveApi.getJobs().get(0).endDate).isNotNull().isCloseTo(new Date(1405778174000L), 1000);
 
         } catch (Exception e) {
             e.printStackTrace();
