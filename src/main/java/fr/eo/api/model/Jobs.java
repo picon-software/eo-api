@@ -53,6 +53,8 @@ public class Jobs extends ApiResult {
     @Root(strict = false)
     public static final class Job {
         @Attribute
+        public long jobID;
+        @Attribute
         public long facilityID;
         @Attribute
         public long stationID;
